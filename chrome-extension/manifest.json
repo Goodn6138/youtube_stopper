@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "EduShorts Filter",
+  "version": "1.0.0",
+  "description": "Filter YouTube Shorts using AI to only show educational or user-specified content categories.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://*.youtube.com/*",
+    "http://localhost:8000/*",
+    "https://your-fastapi-backend.onrender.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "EduShorts Filter",
+    "default_icon": {
+      "16": "public/icon128.png",
+      "48": "public/icon128.png",
+      "128": "public/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/shorts/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "public/icon128.png",
+    "48": "public/icon128.png",
+    "128": "public/icon128.png"
+  },
+  "options_page": "app/options.html"
+}
